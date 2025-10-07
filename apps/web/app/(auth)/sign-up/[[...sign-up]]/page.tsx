@@ -1,8 +1,10 @@
-import { SignUp } from "@clerk/nextjs";
+"use client";
+
+import { SignUpView } from "@/modules/auth/ui/views/sign-out-view";
 
 const Page = () => {
     return (
-        <SignUp/>
+        <SignUpView/>
     );
 };
 
