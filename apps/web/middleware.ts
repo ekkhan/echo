@@ -19,6 +19,7 @@ export default clerkMiddleware(async (auth, req) => {
         await auth.protect();
     }
     if (userId && !orgId && !isOrgFreeRoute(req)){
+      //doesnt leave user hanging on the org page after user picks or creates an org
       const searchParams = new URLSearchParams({redirectUrl: req.url});
 
       const orgSelection = new URL(
