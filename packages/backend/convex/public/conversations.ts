@@ -2,8 +2,10 @@ import { mutation, query } from "../_generated/server";
 import { ConvexError, v } from "convex/values";
 // import { supportAgent } from "../system/ai/agents/supportAgent";
 // import { MessageDoc, saveMessage } from "@convex-dev/agent";
-// import { components } from "../_generated/api";
+import { components } from "../_generated/api";
 import { paginationOptsValidator } from "convex/server";
+import { supportAgent } from "../system/ai/agents/supportAgent";
+import { saveMessage } from "@convex-dev/agent";
 
 // export const getMany = query({
 //   args: {
@@ -80,7 +82,7 @@ export const getOne = query({
     if (!conversation) {
         throw new ConvexError({
             code: "NOT_FOUND",
-            message: "conversation not found"
+            message: "Conversation not found"
         })
     }
 
@@ -132,7 +134,18 @@ export const create = mutation({
     //   }
     // })
 
-    const threadId = "123";
+    const { threadId } = await supportAgent.createThread(ctx, {
+        userId: args.organizationId,
+    })
+
+    await saveMessage(ctx, components.agent, {
+      threadId,
+      message:  {
+        role: "assistant",
+        content: "Hello, how can I help you today?",
+        // content: widgetSettings?.greetMessage || `Hello ${session.name} How can I help you today?`
+      }
+    })
 
     const conversationId = await ctx.db.insert("conversations", {
         contactSessionId: session._id,
