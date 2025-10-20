@@ -55,60 +55,60 @@ import { Doc } from "../_generated/dataModel";
 //   },
 // });
 
-// export const getOne = query({
-//   args: {
-//     conversationId: v.id("conversations")
-//   },
-//   handler: async (ctx, args) => {
-//     const identity = await ctx.auth.getUserIdentity();
+export const getOne = query({
+  args: {
+    conversationId: v.id("conversations")
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
 
-//     if (identity === null) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Invalid session",
-//       });
-//     }
+    if (identity === null) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Invalid session",
+      });
+    }
 
-//     const orgId = identity.orgId as string;
+    const orgId = identity.orgId as string;
 
-//     if (!orgId) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Invalid session",
-//       });
-//     }
+    if (!orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Invalid session",
+      });
+    }
 
-//     const conversation = await ctx.db.get(args.conversationId);
+    const conversation = await ctx.db.get(args.conversationId);
 
-//     if (!conversation) {
-//       throw new ConvexError({
-//         code: "NOT_FOUND",
-//         message: "Conversation not found",
-//       });
-//     }
+    if (!conversation) {
+      throw new ConvexError({
+        code: "NOT_FOUND",
+        message: "Conversation not found",
+      });
+    }
 
-//     if (conversation.organizationId !== orgId) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Invalid session",
-//       });
-//     }
+    if (conversation.organizationId !== orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Invalid session",
+      });
+    }
 
-//     const contactSession = await ctx.db.get(conversation.contactSessionId);
+    const contactSession = await ctx.db.get(conversation.contactSessionId);
 
-//     if (!contactSession) {
-//       throw new ConvexError({
-//         code: "NOT_FOUND",
-//         message: "Contact session not found",
-//       });
-//     }
+    if (!contactSession) {
+      throw new ConvexError({
+        code: "NOT_FOUND",
+        message: "Contact session not found",
+      });
+    }
 
-//     return {
-//       ...conversation,
-//       contactSession,
-//     };
-//   },
-// });
+    return {
+      ...conversation,
+      contactSession,
+    };
+  },
+});
 
 export const getMany = query({
   args: {
