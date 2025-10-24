@@ -3,6 +3,8 @@ import { action, query } from "../_generated/server";
 import { components, internal } from "../_generated/api";
 import { supportAgent } from "../system/ai/agents/supportAgent";
 import { paginationOptsValidator } from "convex/server";
+import { resolveConversation } from "../system/ai/tools/resolveConversation";
+import { escalateConversation } from "../system/ai/tools/escalateConversation";
 // import { resolveConversation } from "../system/ai/tools/resolveConversation";
 // import { escalateConversation } from "../system/ai/tools/escalateConversation";
 // import { saveMessage } from "@convex-dev/agent";
@@ -64,29 +66,30 @@ export const create = action({
 
     // //TODO subscription check
     // const shouldTriggerAgent = conversation.status === "unresolved" && subscription?.status === "active";
+    const shouldTriggerAgent = conversation.status === "unresolved";
 
-    // if (shouldTriggerAgent) {
+    if (shouldTriggerAgent) {
     //   // Cast to any to avoid excessively deep TS instantiation from generic-heavy types
       await supportAgent.generateText(
         ctx,
         {
           threadId: args.threadId,
-        //   tools: {
-        //     resolveConversationTool: resolveConversation,
-        //     escalateConversationTool: escalateConversation,
-        //     searchTool: search,
-        //   },
+          tools: {
+            resolveConversationTool: resolveConversation,
+            escalateConversationTool: escalateConversation,
+            // searchTool: search,
+          },
         },
         {
           prompt: args.prompt,
         }
       );
-    // } else {
-    //     await saveMessage(ctx, components.agent, {
-    //         threadId: args.threadId,
-    //         prompt: args.prompt,
-    //     });
-    // }
+    } else {
+        await supportAgent.saveMessage(ctx, {
+            threadId: args.threadId,
+            prompt: args.prompt,
+        });
+    }
   },
 });
 

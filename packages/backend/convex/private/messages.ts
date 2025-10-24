@@ -6,61 +6,60 @@ import { supportAgent } from "../system/ai/agents/supportAgent";
 import { paginationOptsValidator } from "convex/server";
 import { saveMessage } from "@convex-dev/agent";
 import { openai } from "@ai-sdk/openai";
-// import { OPERATOR_MESSAGE_ENHANCEMENT_PROMPT } from "../system/ai/constants";
 
-// export const enhanceResponse = action({
-//   args: {
-//     prompt: v.string(),
-//   },
-//   handler: async (ctx, args) => {
-//     const identity = await ctx.auth.getUserIdentity();
+export const enhanceResponse = action({
+  args: {
+    prompt: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
 
-//     if (identity === null) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Invalid session",
-//       });
-//     }
+    if (identity === null) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Invalid session",
+      });
+    }
 
-//     const orgId = identity.orgId as string;
+    const orgId = identity.orgId as string;
 
-//     if (!orgId) {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Invalid session",
-//       });
-//     }
+    if (!orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Invalid session",
+      });
+    }
 
-//     const subscription = await ctx.runQuery(
-//           internal.system.subscriptions.getByOrganizationId, {
-//             organizationId: orgId,
-//           }
-//         )
+    // const subscription = await ctx.runQuery(
+    //       internal.system.subscriptions.getByOrganizationId, {
+    //         organizationId: orgId,
+    //       }
+    //     )
 
-//     if (subscription?.status !== "active") {
-//       throw new ConvexError({
-//         code: "UNAUTHORIZED",
-//         message: "Organization does not have an active subscription",
-//       });
-//     }
+    // if (subscription?.status !== "active") {
+    //   throw new ConvexError({
+    //     code: "UNAUTHORIZED",
+    //     message: "Organization does not have an active subscription",
+    //   });
+    // }
 
-//     const response = await generateText({
-//       model: openai("gpt-4o-mini"),
-//       messages: [
-//         {
-//           role: "system",
-//           content: OPERATOR_MESSAGE_ENHANCEMENT_PROMPT,
-//         },
-//         {
-//           role: "user",
-//           content: args.prompt,
-//         },
-//       ],
-//     });
+    const response = await generateText({
+      model: openai("gpt-4o-mini"),
+      messages: [
+        {
+          role: "system",
+          content: "Enhance the operator's message to be more professional, clear, and helpful while maintaining their intent and key information.",
+        },
+        {
+          role: "user",
+          content: args.prompt,
+        },
+      ],
+    });
 
-//     return response.text;
-//   },
-// });
+    return response.text;
+  },
+});
 
 export const create = mutation({
   args: {
