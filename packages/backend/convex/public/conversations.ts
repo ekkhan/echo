@@ -117,36 +117,22 @@ export const create = mutation({
         })
     }
 
-    // const widgetSettings = await ctx.db
-    //   .query("widgetSettings")
-    //   .withIndex("by_organization_id", (q) => q.eq("organizationId", args.organizationId))
-    //   .unique()
+    const widgetSettings = await ctx.db
+      .query("widgetSettings")
+      .withIndex("by_organization_id", (q) => q.eq("organizationId", args.organizationId))
+      .unique()
 
-    // const { threadId } = await (supportAgent as any).createThread(ctx, {
-    //   userId: args.organizationId,
-    // })
-
-    // await saveMessage(ctx, components.agent, {
-    //   threadId,
-    //   message:  {
-    //     role: "assistant",
-    //     content: widgetSettings?.greetMessage || `Hello ${session.name} How can I help you today?`
-    //   }
-    // })
-
-    const { threadId } = await supportAgent.createThread(ctx, {
-        userId: args.organizationId,
+    const { threadId } = await (supportAgent as any).createThread(ctx, {
+      userId: args.organizationId,
     })
 
     await saveMessage(ctx, components.agent, {
       threadId,
       message:  {
         role: "assistant",
-        content: "Hello, how can I help you today?",
-        // content: widgetSettings?.greetMessage || `Hello ${session.name} How can I help you today?`
+        content: widgetSettings?.greetMessage || `Hello ${session.name} How can I help you today?`
       }
     })
-
     const conversationId = await ctx.db.insert("conversations", {
         contactSessionId: session._id,
         status: "unresolved",
