@@ -53,11 +53,10 @@ export const create = action({
       });
     }
 
-    //implement sucscription check
-
-    // await ctx.runMutation(internal.system.contactSessions.refresh, {
-    //   contactSessionId: args.contactSessionId,
-    // })
+    // this refreshes the user's session if they are within the threshold
+    await ctx.runMutation(internal.system.contactSessions.refresh, {
+      contactSessionId: args.contactSessionId,
+    })
 
     // const subscription = await ctx.runQuery(
     //   internal.system.subscriptions.getByOrganizationId, {
