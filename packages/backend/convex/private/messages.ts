@@ -31,18 +31,18 @@ export const enhanceResponse = action({
       });
     }
 
-    // const subscription = await ctx.runQuery(
-    //       internal.system.subscriptions.getByOrganizationId, {
-    //         organizationId: orgId,
-    //       }
-    //     )
+    const subscription = await ctx.runQuery(
+          internal.system.subscriptions.getByOrganizationId, {
+            organizationId: orgId,
+          }
+        )
 
-    // if (subscription?.status !== "active") {
-    //   throw new ConvexError({
-    //     code: "UNAUTHORIZED",
-    //     message: "Organization does not have an active subscription",
-    //   });
-    // }
+    if (subscription?.status !== "active") {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Organization does not have an active subscription",
+      });
+    }
 
     const response = await generateText({
       model: openai("gpt-4o-mini"),

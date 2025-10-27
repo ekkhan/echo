@@ -58,15 +58,14 @@ export const create = action({
       contactSessionId: args.contactSessionId,
     })
 
-    // const subscription = await ctx.runQuery(
-    //   internal.system.subscriptions.getByOrganizationId, {
-    //     organizationId: conversation.organizationId
-    //   }
-    // )
+    const subscription = await ctx.runQuery(
+      internal.system.subscriptions.getByOrganizationId, {
+        organizationId: conversation.organizationId
+      }
+    )
 
-    // //TODO subscription check
-    // const shouldTriggerAgent = conversation.status === "unresolved" && subscription?.status === "active";
-    const shouldTriggerAgent = conversation.status === "unresolved";
+    const shouldTriggerAgent = conversation.status === "unresolved" && subscription?.status === "active";
+    // const shouldTriggerAgent = conversation.status === "unresolved";
 
     if (shouldTriggerAgent) {
     //   // Cast to any to avoid excessively deep TS instantiation from generic-heavy types
