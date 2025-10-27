@@ -1,31 +1,44 @@
-# shadcn/ui monorepo template
+# Echo — SaaS AI Agent Platform
 
-This template is for creating a monorepo with shadcn/ui.
+**Live Demo:** [https://echo-web-orpin.vercel.app/conversations](https://echo-web-orpin.vercel.app/conversations)
 
-## Usage
+Echo is a full-stack AI customer support platform with real-time chat and voice assistance, built with **Next.js**, **Convex**, and **OpenAI**.  
+Each organization has its own secure workspace, knowledge base, and embeddable chat widget for customer interactions.
 
-```bash
-pnpm dlx shadcn@latest init
-```
+---
 
-## Adding components
+## Try it Out
 
-To add components to your app, run the following command at the root of your `web` app:
+1. Go to the [live demo](https://echo-web-orpin.vercel.app/conversations).  
+2. Register for an account using any email.  
+3. Create a new organization and upload a few documents to build a knowledge base.  
+4. Click **Integration** to generate your custom embed script.  
+5. Copy and paste the script into any HTML page to add the AI chat widget.
 
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
-```
+---
 
-This will place the ui components in the `packages/ui/src/components` directory.
+## Apps
 
-## Tailwind
+- **Dashboard (`apps/web`)** – Admin panel for managing agents, knowledge bases, and organization settings.  
+- **Embed Widget (`apps/embed`)** – Lightweight chat widget built with **Vite** that can be embedded on any website via a `<script>` tag.  
+- **Backend (`convex/`)** – Handles real-time messaging, AI responses, and organization data management.
 
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
+---
 
-## Using components
+## Tech Stack
 
-To use the components in your app, import them from the `ui` package.
+**Frontend:** Next.js, React, Tailwind CSS, Jotai, shadcn/ui  
+**Backend:** Convex, OpenAI (RAG-based knowledge retrieval)  
+**Auth and Billing:** Clerk, Stripe  
+**Infrastructure and Tools:** AWS (EC2 and Secrets Manager), Turborepo, Vite, Git, Mailgun
 
-```tsx
-import { Button } from "@workspace/ui/components/button"
-```
+---
+
+## Features
+
+- Real-time chat and voice AI support  
+- Retrieval-Augmented Generation (RAG) for accurate, grounded responses  
+- Multi-tenant architecture with isolated organization data and API keys  
+- Secure key management using AWS Secrets Manager  
+- Embeddable chat widget for third-party sites  
+- Operator Dashboard for managing and assisting live conversations  
