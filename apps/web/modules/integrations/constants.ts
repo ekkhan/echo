@@ -23,7 +23,7 @@ export const INTEGRATIONS = [
   
   export type IntegrationId = (typeof INTEGRATIONS)[number]["id"];
   
-  export const HTML_SCRIPT = `<script src="" data-organization-id="{{ORGANIZATION_ID}}">html</script>`;
-  export const REACT_SCRIPT = `<script src="" data-organization-id="{{ORGANIZATION_ID}}">react</script>`;
-  export const JAVASCRIPT_SCRIPT = `<script src="" data-organization-id="{{ORGANIZATION_ID}}">javascript</script>`;
-  export const NEXTJS_SCRIPT = `<script src="" data-organization-id="{{ORGANIZATION_ID}}">nextjs</script>`;
+  export const HTML_SCRIPT = `<script src="https://echo-widget-snowy.vercel.app/widget.js" data-organization-id="{{ORGANIZATION_ID}}">html</script>`;
+  export const REACT_SCRIPT = `<script src="https://echo-widget-snowy.vercel.app/widget.js" data-organization-id="{{ORGANIZATION_ID}}">react</script>`;
+  export const JAVASCRIPT_SCRIPT = `<script src="https://echo-widget-snowy.vercel.app/widget.js" data-organization-id="{{ORGANIZATION_ID}}">javascript</script>`;
+  export const NEXTJS_SCRIPT = `<script src="https://echo-widget-snowy.vercel.app/widget.js" data-organization-id="{{ORGANIZATION_ID}}">nextjs</script>`;
