@@ -19,8 +19,9 @@ Each organization has its own secure workspace, knowledge base, and embeddable c
 
 ## Apps
 
-- **Dashboard (`apps/web`)** – Admin panel for managing agents, knowledge bases, and organization settings.  
-- **Embed Widget (`apps/embed`)** – Lightweight chat widget built with **Vite** that can be embedded on any website via a `<script>` tag.  
+- **Dashboard (`apps/web`)** – Admin panel for managing agents, knowledge bases, and organization settings.
+- Widget (`apps/widget`)* – The full chat UI and logic (conversation window, message handling, etc.). Built with React + Tailwind.
+- **Embed Widget (`apps/embed`)** – A lightweight Vite-built script that loads the widget onto any external website through a `<script>` tag.  
 - **Backend (`convex/`)** – Handles real-time messaging, AI responses, and organization data management.
 
 ---
