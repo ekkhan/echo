@@ -30,7 +30,7 @@ Each organization has its own secure workspace, knowledge base, and embeddable c
 **Frontend:** Next.js, React, Tailwind CSS, Jotai, shadcn/ui  
 **Backend:** Convex, OpenAI (RAG-based knowledge retrieval)  
 **Auth and Billing:** Clerk, Stripe  
-**Infrastructure and Tools:** AWS (EC2 and Secrets Manager), Turborepo, Vite, Git, Mailgun
+**Infrastructure and Tools:** AWS (EC2 and Secrets Manager), Turborepo, Vite.
 
 ---
 
